@@ -1,0 +1,17 @@
+{
+  "name": "mes-server",
+  "version": "1.0.0",
+  "description": "MES - Industry 4.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Edoardo Spadoni",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mysql": "^2.15.0",
+    "soap": "^0.23.0"
+  }
+}
