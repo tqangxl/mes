@@ -16,8 +16,8 @@ module.exports = {
         app.get('/models/', function (req, res) {
             machine.getAllModels(res);
         });
-        app.get('/models/:id', function (req, res) {
-            machine.getModel(req.params.id, res);
+        app.get('/articles/', function (req, res) {
+            machine.getAllArticles(res);
         });
     }
 };
