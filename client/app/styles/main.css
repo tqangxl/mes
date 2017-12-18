@@ -2,7 +2,7 @@ body {
   padding: 0;
 }
 
-.header {
+.header-main {
   height: 50px;
   line-height: 50px;
   padding-left: 10px;
@@ -11,17 +11,17 @@ body {
   color: #d8d8d8;
 }
 
-.logo {
+.logo-main {
   float: right;
   height: 50px;
   padding-right: 10px;
 }
 
-.container {
+.container-main {
   padding: 10px;
 }
 
-.footer {
+.footer-main {
   position: fixed;
   bottom: 0;
   width: 100%;

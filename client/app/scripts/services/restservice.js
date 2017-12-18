@@ -11,7 +11,7 @@ angular.module('mesUiApp')
   .service('RestService', function ($q, $http) {
     this.get = function (endpoint) {
       return $q(function (resolve, reject) {
-        $http.get(config.API_URL + endpoint).then(function (data) {
+        $http.get(configs.API_URL + endpoint).then(function (data) {
           resolve(data.data);
         }, function (err) {
           reject(err);
@@ -22,7 +22,7 @@ angular.module('mesUiApp')
     this.post = function (endpoint, obj) {
       obj.secret = StorageService.get('secret');
       return $q(function (resolve, reject) {
-        $http.post(config.API_URL + endpoint, obj).then(function (data) {
+        $http.post(configs.API_URL + endpoint, obj).then(function (data) {
           resolve(data.data);
         }, function (err) {
           reject(err);
@@ -34,7 +34,7 @@ angular.module('mesUiApp')
       var secret = StorageService.get('secret');
       return $q(function (resolve, reject) {
         $http({
-          url: config.API_URL + endpoint,
+          url: configs.API_URL + endpoint,
           method: 'DELETE',
           data: {
             secret: secret

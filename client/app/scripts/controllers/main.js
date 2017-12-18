@@ -8,8 +8,19 @@
 angular.module('mesUiApp')
   .controller('MainCtrl', function ($scope, MachineService) {
     $scope.obj = {
+      articles: [],
       models: [],
-      params: []
+      params: [],
+      searchArticles: '',
+      currentParams: {}
+    };
+
+    $scope.getAllArticles = function () {
+      MachineService.getAllArticles().then(function (articles) {
+        $scope.obj.articles = articles;
+      }, function (reason) {
+        console.error(reason);
+      });
     };
 
     $scope.getAllModels = function () {
@@ -21,19 +32,43 @@ angular.module('mesUiApp')
     };
 
     $scope.getAllParams = function () {
-      MachineService.getAllParams().then(function (models) {
-        $scope.obj.models = models;
+      MachineService.getAllParams().then(function (params) {
+        $scope.obj.params = params;
+        for (var p in params) {
+          $scope.obj.currentParams[params[p].code] = '';
+        }
       }, function (reason) {
         console.error(reason);
       });
     };
 
-    $scope.getAllModels();
+    $scope.getParam = function (code) {
+      MachineService.getParam(code).then(function (paramVal) {
+        $scope.obj.currentParams[code] = paramVal;
+      }, function (reason) {
+        console.error(reason);
+      });
+    };
+
+    $scope.setParam = function (code, value) {
+      MachineService.setParam({
+        code: code,
+        value: value
+      }).then(function (result) {
+        console.log(result);
+      }, function (reason) {
+        console.error(reason);
+      });
+    };
+
+    $scope.getAllArticles();
     $scope.getAllParams();
 
     // polling machine
     setInterval(function () {
-      $scope.getAllParams();
-    }, config.POLLING_INTERVAL + Math.floor(Math.random() * 1000));
+      for (var p in $scope.obj.currentParams) {
+        $scope.getParam(p);
+      }
+    }, configs.POLLING_INTERVAL + Math.floor(Math.random() * 1000));
 
   });

@@ -9,20 +9,20 @@
  */
 angular.module('mesUiApp')
   .service('MachineService', function ($q, RestService) {
-    this.getAllModels = function () {
+    this.getAllArticles = function () {
       return $q(function (resolve, reject) {
-        RestService.get('/models').then(function (models) {
-          resolve(models);
+        RestService.get('/articles').then(function (articles) {
+          resolve(articles);
         }, function (reason) {
           reject(reason);
         });
       });
     };
 
-    this.getModel = function (id) {
+    this.getAllModels = function () {
       return $q(function (resolve, reject) {
-        RestService.get('/models/' + id).then(function (model) {
-          resolve(model);
+        RestService.get('/models').then(function (models) {
+          resolve(models);
         }, function (reason) {
           reject(reason);
         });

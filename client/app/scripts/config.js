@@ -1,4 +1,4 @@
-var config = {
+var configs = {
   VERSION: '1.0',
   TITLE: 'MES - Industry 4.0',
   DESCRIPTION: 'Manufacturing Execution System',

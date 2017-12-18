@@ -10,9 +10,9 @@
 angular.module('mesUiApp')
   .controller('InitCtrl', function ($scope) {
     $scope.appDetails = {
-      version: config.VERSION,
-      header: config.TITLE,
-      footer: config.DESCRIPTION,
-      logo: config.LOGO
+      version: configs.VERSION,
+      header: configs.TITLE,
+      footer: configs.DESCRIPTION,
+      logo: configs.LOGO
     };
   });
