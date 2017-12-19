@@ -9,7 +9,9 @@ var configs = {
     ALLOWED_ORIGIN: 'http://localhost:8000',
     ALLOWED_VERBS: ['GET', 'PUT', 'PATCH', 'POST', 'DELETE'],
     SOAP_URL: 'http://SOAP_SERVER_URL/soap/RuntimeAccess',
-    SOAP_ACTION: 'http://SOAP_SERVER_URL:80/soap/RuntimeAccess'
+    SOAP_ACTION: 'http://SOAP_SERVER_URL:80/soap/RuntimeAccess',
+    SOAP_USER: 'YOUR-SOAP-USER',
+    SOAP_PASSWORD: 'YOUR-SOAP-PASSWORD'
 };
 
 module.exports = configs;

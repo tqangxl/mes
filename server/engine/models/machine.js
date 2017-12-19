@@ -1,4 +1,5 @@
 var request = require('request');
+var parseString = require('xml2js').parseString;
 
 var connection = require('../db/connection');
 var configs = require('../../config/config');
@@ -13,6 +14,7 @@ function Machine() {
         '</soap:Body>',
         '</soap:Envelope>'
     ].join();
+    this.token = Buffer.from(configs.SOAP_USER + ':' + configs.SOAP_PASSWORD).toString('base64');
 
     this.getAllModels = function (res) {
         connection.acquire(function (err, con) {
@@ -65,13 +67,14 @@ function Machine() {
             '<A type="xsd:string">"' + code + '"</A>',
             '</GetValue>'
         ].join('');
-        request.get({
+        request.post({
             url: configs.SOAP_URL,
             body: this.payloadHeader + this.payloadContent + this.payloadFooter,
             headers: {
                 'Content-Type': 'text/xml;charset=UTF-8',
                 'Host': 'HMI_Panel',
                 'SoapAction': configs.SOAP_ACTION,
+                'Authorization': 'Basic ' + this.token
             }
         }, function (err, response, body) {
             if (err) {
@@ -79,7 +82,9 @@ function Machine() {
                     message: 'Get param ' + code + ' failed: ' + err
                 });
             } else {
-                res.status(200).json(body);
+                parseString(body, function (err, result) {
+                    res.status(200).json(result['soap:Envelope']['soap:Body'][0].Result);
+                });
             }
         });
     };
@@ -91,13 +96,14 @@ function Machine() {
             '<B type="xsd:string">"' + param.value + '"</B>',
             '</SetValue>'
         ].join('');
-        request.get({
+        request.post({
             url: configs.SOAP_URL,
             body: this.payloadHeader + this.payloadContent + this.payloadFooter,
             headers: {
                 'Content-Type': 'text/xml;charset=UTF-8',
                 'Host': 'HMI_Panel',
                 'SoapAction': configs.SOAP_ACTION,
+                'Authorization': 'Basic ' + this.token
             }
         }, function (err, response, body) {
             if (err) {
@@ -105,7 +111,9 @@ function Machine() {
                     message: 'Get param ' + code + ' failed: ' + err
                 });
             } else {
-                res.status(200).json(body);
+                parseString(body, function (err, result) {
+                    res.status(200).json(result['soap:Envelope']['soap:Body'][0].Result);
+                });
             }
         });
     };
