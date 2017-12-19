@@ -44,7 +44,7 @@ angular.module('mesUiApp')
 
     $scope.getParam = function (code) {
       MachineService.getParam(code).then(function (paramVal) {
-        $scope.obj.currentParams[code] = paramVal;
+        $scope.obj.currentParams[code] = paramVal[0].trim();
       }, function (reason) {
         console.error(reason);
       });

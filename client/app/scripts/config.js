@@ -4,5 +4,5 @@ var configs = {
   DESCRIPTION: 'Manufacturing Execution System',
   LOGO: 'http://YOUR_SITE/logo/logo.jpg',
   API_URL: 'http://NODE_SERVER_IP:NODE_SERVER_PORT',
-  POLLING_INTERVAL: 10000 // ms
+  POLLING_INTERVAL: 5000 // ms
 };
