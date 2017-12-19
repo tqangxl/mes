@@ -154,7 +154,9 @@ module.exports = function (grunt) {
     postcss: {
       options: {
         processors: [
-          require('autoprefixer-core')({browsers: ['last 1 version']})
+          require('autoprefixer-core')({
+            browsers: ['last 1 version']
+          })
         ]
       },
       server: {
@@ -182,25 +184,25 @@ module.exports = function (grunt) {
     wiredep: {
       app: {
         src: ['<%= yeoman.app %>/index.html'],
-        ignorePath:  /\.\.\//
+        ignorePath: /\.\.\//
       },
       test: {
         devDependencies: true,
         src: '<%= karma.unit.configFile %>',
-        ignorePath:  /\.\.\//,
-        fileTypes:{
+        ignorePath: /\.\.\//,
+        fileTypes: {
           js: {
             block: /(([\s\t]*)\/{2}\s*?bower:\s*?(\S*))(\n|\r|.)*?(\/{2}\s*endbower)/gi,
-              detect: {
-                js: /'(.*\.js)'/gi
-              },
-              replace: {
-                js: '\'{{filePath}}\','
-              }
+            detect: {
+              js: /'(.*\.js)'/gi
+            },
+            replace: {
+              js: '\'{{filePath}}\','
             }
           }
+        }
       }
-    }, 
+    },
 
     // Renames files for browser caching purposes
     filerev: {
@@ -209,7 +211,8 @@ module.exports = function (grunt) {
           '<%= yeoman.dist %>/scripts/{,*/}*.js',
           '<%= yeoman.dist %>/styles/{,*/}*.css',
           '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-          '<%= yeoman.dist %>/styles/fonts/*'
+          '<%= yeoman.dist %>/styles/fonts/*',
+          '!<%= yeoman.dist %>/scripts/config.js',
         ]
       }
     },
@@ -245,7 +248,9 @@ module.exports = function (grunt) {
           '<%= yeoman.dist %>/styles'
         ],
         patterns: {
-          js: [[/(images\/[^''""]*\.(png|jpg|jpeg|gif|webp|svg))/g, 'Replacing references to images']]
+          js: [
+            [/(images\/[^''""]*\.(png|jpg|jpeg|gif|webp|svg))/g, 'Replacing references to images']
+          ]
         }
       }
     },
@@ -367,6 +372,11 @@ module.exports = function (grunt) {
           cwd: '.tmp/images',
           dest: '<%= yeoman.dist %>/images',
           src: ['generated/*']
+        }, {
+          expand: true,
+          cwd: 'app/scripts/',
+          src: ['config.js'],
+          dest: '<%= yeoman.dist %>/scripts/',
         }]
       },
       styles: {
