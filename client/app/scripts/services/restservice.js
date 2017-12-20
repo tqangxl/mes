@@ -20,7 +20,6 @@ angular.module('mesUiApp')
     };
 
     this.post = function (endpoint, obj) {
-      obj.secret = StorageService.get('secret');
       return $q(function (resolve, reject) {
         $http.post(configs.API_URL + endpoint, obj).then(function (data) {
           resolve(data.data);
@@ -31,14 +30,10 @@ angular.module('mesUiApp')
     };
 
     this.delete = function (endpoint) {
-      var secret = StorageService.get('secret');
       return $q(function (resolve, reject) {
         $http({
           url: configs.API_URL + endpoint,
           method: 'DELETE',
-          data: {
-            secret: secret
-          },
           headers: {
             'Content-Type': 'application/json;charset=utf-8'
           }

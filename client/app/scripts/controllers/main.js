@@ -50,10 +50,21 @@ angular.module('mesUiApp')
       });
     };
 
-    $scope.setParam = function (code, value) {
+    $scope.setParam = function (artCode, artAmount) {
+      // set print code
       MachineService.setParam({
-        code: code,
-        value: value
+        code: configs.TAG_COD_PRINT,
+        value: artCode
+      }).then(function (result) {
+        console.log(result);
+      }, function (reason) {
+        console.error(reason);
+      });
+
+      // set c1
+      MachineService.setParam({
+        code: configs.TAG_COD_NUM,
+        value: artAmount
       }).then(function (result) {
         console.log(result);
       }, function (reason) {

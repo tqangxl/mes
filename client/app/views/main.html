@@ -16,8 +16,8 @@
         <div class="description">
           <p>{{m.description}}</p>
           <div class="ui action input">
-            <input type="text" placeholder="Insert value...">
-            <button ng-click="setParam('Conta Pezzi_C4', 150)" class="ui button">Send</button>
+            <input ng-model="m.amount" type="text" placeholder="Insert value...">
+            <button ng-click="setParam(m.code, m.amount)" class="ui button">Send</button>
           </div>
         </div>
       </div>
@@ -32,16 +32,16 @@
   <table class="ui fixed single line celled table">
     <thead>
       <tr>
-        <th>Code</th>
-        <th>Status</th>
         <th>Description</th>
+        <th>Status</th>
+        <th>Code</th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="p in obj.params">
-        <td>{{p.code}}</td>
+        <td>{{p.description}}</td>
         <td>{{obj.currentParams[p.code]}}</td>
-        <td title="{{p.description}}">{{p.description}}</td>
+        <td title="{{p.code}}">{{p.code}}</td>
       </tr>
     </tbody>
   </table>
