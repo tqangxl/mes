@@ -92,8 +92,8 @@ function Machine() {
     this.setParam = function (param, res) {
         this.payloadContent = [
             '<SetValue xmlns="http://tempuri.org/wsdl/">',
-            '<A type="xsd:string">"' + param.code + '"</A>',
-            '<B type="xsd:string">"' + param.value + '"</B>',
+            '<A type="xsd:string">' + param.code + '</A>',
+            '<B type="xsd:string">' + param.value + '</B>',
             '</SetValue>'
         ].join('');
         request.post({
